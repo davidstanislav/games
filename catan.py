@@ -40,7 +40,7 @@ are abundant.
 """
 
 def create_resource_record(board):
-    resources = {"wheat": {"numbers": []}, "sheep": {"numbers": []}, "stone": {"numbers": []},  "wood": {"numbers": []},  "brick": {"numbers": []},  "sevens": {"numbers": [7]}}
+    resources = {"wheat": {"numbers": [], "freq": 0}, "sheep": {"numbers": [], "freq": 0}, "stone": {"numbers": [], "freq": 0},  "wood": {"numbers": [], "freq": 0},  "brick": {"numbers": [], "freq": 0},  "sevens": {"numbers": [7], "freq": 0}}
     
     for i in board.keys():
         if board[i]['resource'] == "desert":
@@ -58,8 +58,12 @@ def roll():
     d2 = random.randint(1, 6)
     return(d1 + d2)
 
-for i in range(0, 10):
-    print(roll())
+for i in range(0, 50):
+    roll_i = roll()
+    print(roll_i)
+    for j in resource_record.keys():
+        if(roll_i in resource_record[j]['numbers']):
+            resource_record[j]['freq'] = resource_record[j]['freq'] + 1
 
 
 
