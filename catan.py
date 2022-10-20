@@ -32,7 +32,14 @@ def create_board():
     return(board)
 
 board = create_board()
-    
+
+board["A"]["neighborhood"] = {"UR": board["B"], "R": board["C"], "LR": board["D"], "LL": board["E"], "L": board["F"], "UL": board["G"]}
+board["B"]["neighborhood"] = {"UR": None, "R": None, "LR": board["C"], "LL": board["A"], "L": board["G"], "UL": None}
+board["C"]["neighborhood"] = {"UR": None, "R": None, "LR": None, "LL": board["D"], "L": board["A"], "UL": board["B"]}
+board["D"]["neighborhood"] = {"UR": board["C"], "R": None, "LR": None, "LL": None, "L": board["E"], "UL": board["A"]}
+board["E"]["neighborhood"] = {"UR": board["A"], "R": None, "LR": None, "LL": board["D"], "L": board["A"], "UL": board["F"]}
+board["F"]["neighborhood"] = {"UR": board["G"], "R": board["A"], "LR": board["E"], "LL": None, "L": None, "UL": None}
+board["G"]["neighborhood"] = {"UR": None, "R": board["B"], "LR": board["A"], "LL": board["F"], "L": None, "UL": None}
     
 """
 The board is now set. Lets create a dictionary to keep track of which resources
@@ -58,6 +65,9 @@ def roll():
     d2 = random.randint(1, 6)
     return(d1 + d2)
 
+"""
+Simulate game
+"""
 for i in range(0, 50):
     roll_i = roll()
     print(roll_i)
