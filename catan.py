@@ -43,14 +43,16 @@ def create_board():
     return(board)
 
 board = create_board()
-    
 
-A_verticies = {"1": [board["A"], board["A"]["neighborhood"]['UR'], [board["A"]["neighborhood"]['R']]],
-               "2": [board["A"], board["A"]["neighborhood"]['R'], [board["A"]["neighborhood"]['LR']]],
-               "3": [board["A"], board["A"]["neighborhood"]['LR'], [board["A"]["neighborhood"]['LL']]],
-               "4": [board["A"], board["A"]["neighborhood"]['LL'], [board["A"]["neighborhood"]['L']]],
-               "5": [board["A"], board["A"]["neighborhood"]['L'], [board["A"]["neighborhood"]['UL']]],
-               "6": [board["A"], board["A"]["neighborhood"]['UL'], [board["A"]["neighborhood"]['UR']]],}
+for i in board.keys():
+    verticies = {"1": [board[i], board[i]["neighborhood"]['UR'], board[i]["neighborhood"]['R']],
+                   "2": [board[i], board[i]["neighborhood"]['R'], board[i]["neighborhood"]['LR']],
+                   "3": [board[i], board[i]["neighborhood"]['LR'], board[i]["neighborhood"]['LL']],
+                   "4": [board[i], board[i]["neighborhood"]['LL'], board[i]["neighborhood"]['L']],
+                   "5": [board[i], board[i]["neighborhood"]['L'], board[i]["neighborhood"]['UL']],
+                   "6": [board[i], board[i]["neighborhood"]['UL'], board[i]["neighborhood"]['UR']]                  
+                   }
+    board[i]['verticies'] = verticies
 
 """
 The board is now set. Lets create a dictionary to keep track of which resources
@@ -78,6 +80,7 @@ def roll():
 
 """
 Simulate game
+
 """
 for i in range(0, 100):
     roll_i = roll()
