@@ -12,10 +12,26 @@ def create_board():
     number_tiles = [4, 5, 6, 8, 9, 10]
     resource_tiles = ["wheat", "wheat", "stone", "brick", "sheep", "wood", "desert"]
     
-    # board = [A, B, C, D, E, F, G]
-    board = {"A": {}, "B": {}, "C": {}, "D": {}, "E": {}, "F": {}, "G": {}}
     
-
+    A = {}
+    B = {}
+    C = {}
+    D = {}
+    E = {}
+    F = {}
+    G = {}
+    # board = [A, B, C, D, E, F, G]
+    board = {"A": A, "B": B, "C": C, "D": D, "E": E, "F": F, "G": G}
+    
+    board["A"]["neighborhood"] = {"UR": B, "R": C, "LR": D, 
+                                  "LL": E, "L": F, "UL": G}
+    
+    board["B"]["neighborhood"] = {"UR": None, "R": None, "LR": C, "LL": A, "L": G, "UL": None}
+    board["C"]["neighborhood"] = {"UR": None, "R": None, "LR": None, "LL": D, "L": A, "UL": B}
+    board["D"]["neighborhood"] = {"UR": C, "R": None, "LR": None, "LL": None, "L": E, "UL": A}
+    board["E"]["neighborhood"] = {"UR": A, "R": None, "LR": None, "LL": D, "L": A, "UL": F}
+    board["F"]["neighborhood"] = {"UR": G, "R": A, "LR": E, "LL": None, "L": None, "UL": None}
+    board["G"]["neighborhood"] = {"UR": None, "R": B, "LR": A, "LL": F, "L": None, "UL": None}
     
     for i in board.keys():
         j = random.randint(0,len(resource_tiles) - 1)
@@ -24,6 +40,7 @@ def create_board():
     
     for k in board.keys():
         if board[k]['resource'] == "desert":
+            board[k]['number'] = 0
             continue
         """
         Note: this is not strictly how the numbers are typically disbursed. 
@@ -31,14 +48,8 @@ def create_board():
         m = random.randint(0,len(number_tiles) - 1)
         board[k]['number'] = number_tiles[m]
         del number_tiles[m]
-    
-    board["A"]["neighborhood"] = {"UR": board["B"], "R": board["C"], "LR": board["D"], "LL": board["E"], "L": board["F"], "UL": board["G"]}
-    board["B"]["neighborhood"] = {"UR": None, "R": None, "LR": board["C"], "LL": board["A"], "L": board["G"], "UL": None}
-    board["C"]["neighborhood"] = {"UR": None, "R": None, "LR": None, "LL": board["D"], "L": board["A"], "UL": board["B"]}
-    board["D"]["neighborhood"] = {"UR": board["C"], "R": None, "LR": None, "LL": None, "L": board["E"], "UL": board["A"]}
-    board["E"]["neighborhood"] = {"UR": board["A"], "R": None, "LR": None, "LL": board["D"], "L": board["A"], "UL": board["F"]}
-    board["F"]["neighborhood"] = {"UR": board["G"], "R": board["A"], "LR": board["E"], "LL": None, "L": None, "UL": None}
-    board["G"]["neighborhood"] = {"UR": None, "R": board["B"], "LR": board["A"], "LL": board["F"], "L": None, "UL": None}
+    # return(board)
+
     
     return(board)
 
@@ -60,7 +71,12 @@ are abundant.
 """
 
 def create_resource_record(board):
-    resources = {"wheat": {"numbers": [], "freq": 0}, "sheep": {"numbers": [], "freq": 0}, "stone": {"numbers": [], "freq": 0},  "wood": {"numbers": [], "freq": 0},  "brick": {"numbers": [], "freq": 0},  "sevens": {"numbers": [7], "freq": 0}}
+    resources = {"wheat": {"numbers": [], "freq": 0}, 
+                 "sheep": {"numbers": [], "freq": 0}, 
+                 "stone": {"numbers": [], "freq": 0},  
+                 "wood": {"numbers": [], "freq": 0},  
+                 "brick": {"numbers": [], "freq": 0},  
+                 "sevens": {"numbers": [7], "freq": 0}}
     
     for i in board.keys():
         if board[i]['resource'] == "desert":
