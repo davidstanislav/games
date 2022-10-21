@@ -31,8 +31,8 @@ def create_board():
                                   "LL": "D", "L": "A", "UL": "B"}
     board["D"]["neighborhood"] = {"UR": "C", "R": None, "LR": None, 
                                   "LL": None, "L": "E", "UL": "A"}
-    board["E"]["neighborhood"] = {"UR": "A", "R": None, "LR": None, 
-                                  "LL": "D", "L": "A", "UL": "F"}
+    board["E"]["neighborhood"] = {"UR": "A", "R": "D", "LR": None, 
+                                  "LL": None, "L": None, "UL": "F"}
     board["F"]["neighborhood"] = {"UR": "G", "R": "A", "LR": "E", 
                                   "LL": None, "L": None, "UL": None}
     board["G"]["neighborhood"] = {"UR": None, "R": "B", "LR": "A", 
@@ -95,9 +95,22 @@ def create_vertex_record(board):
     for i in board.keys():
         for j in board[i]['verticies'].keys():
             vert_key_ij = str(i) + str(j)
+            vert_record[vert_key_ij] =  {"wheat": {"freq": 0}, 
+                                         "sheep": {"freq": 0}, 
+                                         "stone": {"freq": 0},  
+                                         "wood": {"freq": 0},  
+                                         "brick": {"freq": 0},
+                                         "desert": {"freq": 0}}
             print(vert_key_ij)
-            vert_record[vert_key_ij] = {}
-            
+            neighbors = board[i]['verticies'][j]
+            neighbors = [m for m in neighbors if m is not None]
+            for k in neighbors:
+                resource = board[k]['resource']
+                number = board[k]['number']
+                print(resource + " " + str(number))
+                vert_record[vert_key_ij][resource]["number"] = number
+    
+    
     return(vert_record)
 
 
