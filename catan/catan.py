@@ -122,6 +122,18 @@ def roll():
     d2 = random.randint(1, 6)
     return(d1 + d2)
 
+def roll_alt(num_sides):
+    
+    d1 = random.randint(1,num_sides)
+    
+    return(d1)
+
+
+
+f100 = roll_alt(num_sides=100)
+
+f12 = roll_alt(num_sides=12)
+
 
 if __name__ == "__main__":
     board = create_board()
