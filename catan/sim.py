@@ -31,3 +31,15 @@ for i in range(0, 100):
             
             if(vertex_record[k][m]["number"] == roll_i):
                 vertex_record[k][m]["freq"] = vertex_record[k][m]["freq"] + 1
+                
+                
+import numpy as np
+import matplotlib as mpl
+import matplotlib.pyplot as plt
+
+resources = resource_record.keys()
+
+fig2, ax2 = plt.subplots()
+freqs = [resource_record['wheat']['freq'], resource_record['sheep']['freq'], resource_record['stone']['freq'],resource_record['wood']['freq'],resource_record['brick']['freq'], resource_record['sevens']['freq']]
+ax2.bar(resources, freqs, color=['gold', 'lightgreen', 'darkgrey', 'darkolivegreen', 'darkred', 'black'])
+fig2.show()
